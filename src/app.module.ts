@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloFederationDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
 import { UsersModule } from './users/users.module';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { PrismaModule } from './prisma-service/prisma.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
       plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
       introspection: true,
       }),
-      UsersModule
+      UsersModule,
+      PrismaModule
   ],
   controllers: [AppController],
   providers: [AppService],
