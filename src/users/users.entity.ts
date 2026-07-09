@@ -19,6 +19,9 @@ export class User {
   @Field(() => GraphQLISODateTime)
   createdAt!: Date;
 
-  @Field(() => GraphQLISODateTime)
-  updatedAt!: Date;
+  @Field(() => GraphQLISODateTime, { nullable: true })
+  updatedAt!: Date | null;
+
+  @Field(() => GraphQLISODateTime, { nullable: true })
+  deletedAt!: Date | null;
 }
