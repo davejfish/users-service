@@ -19,4 +19,5 @@ scalar DateTime
 
 type Query {
   getUsers: [User!]!
+  getUserById(id: ID!): User!
 }
