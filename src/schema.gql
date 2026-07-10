@@ -8,8 +8,8 @@ type User {
   firstName: String!
   lastName: String!
   createdAt: DateTime!
-  updatedAt: DateTime!
-  deletedAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
 }
 
 """
