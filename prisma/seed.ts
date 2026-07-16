@@ -14,6 +14,17 @@ const users = [
 ];
 
 async function main() {
+  // Drop anything outside the seed set (e.g. rows added by hand while testing) so a demo
+  // always shows exactly these users. Note this only prunes — the upsert below deliberately
+  // keeps existing seeded rows in place, since posts-service stores user IDs as authorId and
+  // a delete-and-recreate would churn them, dangling every post until posts are re-seeded.
+  const { count } = await prisma.user.deleteMany({
+    where: { email: { notIn: users.map((user) => user.email) } },
+  });
+  if (count > 0) {
+    console.log(`  🧹 Removed ${count} user(s) outside the seed set.`);
+  }
+
   for (const user of users) {
     // upsert on the unique email keeps the seed idempotent (safe to re-run)
     const record = await prisma.user.upsert({
